@@ -1,59 +1,38 @@
-# ImageGallery
+# 📸 Image Gallery - Angular 18 & Security Hardening
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.10.
+![Angular](https://img.shields.io/badge/Angular-18-DD0031?style=for-the-badge&logo=angular)
+![pnpm](https://img.shields.io/badge/pnpm-v11-F69220?style=for-the-badge&logo=pnpm)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)
 
-## Development server
+Este proyecto representa la **Actividad 1 de la Unidad 2** (Image Gallery), desarrollada bajo un protocolo de **Ingeniería Real** y blindaje de infraestructura ante amenazas activas en el ecosistema NPM.
 
-To start a local development server, run:
+## 🛠️ Tecnologías Utilizadas
+* **Core:** Angular 18+ con Standalone Components.
+* **Gestor de Infraestructura:** pnpm v11 (Sincronización segura).
+* **Estilos:** TailwindCSS para diseño UI utilitario.
+* **Tipado:** TypeScript 5.4+ para modelos de datos estrictos.
+* **Entorno:** VS Code operando sobre Ubuntu 24.04.
 
-```bash
-ng serve
-```
+## 📋 Funcionalidades
+* **Reactividad Nativa:** Gestión de datos mediante **Signals** (`input()`) para una reactividad eficiente.
+* **Control de Flujo:** Implementación de la nueva sintaxis `@for` y `@empty`.
+* **Performance:** Optimización de carga visual con `NgOptimizedImage`.
+* **Seguridad:** Aislamiento de ejecución de scripts en dependencias.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛡️ Protocolo de Seguridad (Hardening)
+Dada la alerta global de *supply chain attacks* en el registro de NPM, el búnker de desarrollo aplica:
+1. **Zero-Trust Scripts:** Bloqueo de ejecuciones automáticas (`ignore-scripts = true`).
+2. [cite_start]**Aislamiento pnpm:** Prevención de dependencias fantasma mediante el uso de enlaces simbólicos estrictos[cite: 79].
+3. **Auditoría Forense:** Monitoreo activo de red y procesos locales durante la fase de construcción.
 
-## Code scaffolding
+## 📂 Estructura del Proyecto (Optimizado)
+```text
+src/app/
+├── components/
+│   ├── gallery/        # Lógica principal con Signals
+│   └── image-item/     # Componente atómico de imagen
+├── models/             # Interfaz de datos Image
+└── app.ts              # Componente raíz
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+👤 Autora
+Desarrollado con serenidad y código por Ana. 🔗 Mi GitHub: Haz clic aquí para ver mi perfil
