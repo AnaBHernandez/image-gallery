@@ -1,1 +1,11 @@
-<p>gallery works!</p>
+<div class="max-w-6xl mx-auto px-4">
+  <h1 class="text-4xl font-black text-slate-900 mb-8 text-center tracking-tighter">
+    GALLERY_SHOWCASE
+  </h1>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (img of images(); track img.id) {
+      <app-image-item [imageData]="img"></app-image-item>
+    }
+  </div>
+</div>

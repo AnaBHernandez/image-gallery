@@ -1,1 +1,18 @@
-<p>image-item works!</p>
+<div class="overflow-hidden rounded-xl bg-white shadow-sm border border-slate-200 transition-all duration-300 hover:shadow-md hover:scale-[1.02]">
+  <div class="w-full h-48 bg-slate-100">
+    <img 
+      [src]="imageData().src" 
+      [alt]="imageData().alt"
+      class="w-full h-full object-cover"
+    />
+  </div>
+  
+  <div class="p-4">
+    <span class="text-xs font-mono text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md">
+      ID: #{{ imageData().id }}
+    </span>
+    <h3 class="text-lg font-bold text-slate-800 mt-2 truncate">
+      {{ imageData().alt }}
+    </h3>
+  </div>
+</div>
