@@ -1,0 +1,14 @@
+## 🛰️ BLOQUE TÉCNICO-COMERCIAL: IMAGE GALLERY MVP (UNIDADES 1-3)
+
+### 1. Problema Resuelto (Pain Point)
+* **Optimización de Carga LCP (Largest Contentful Paint):** Sustitución del renderizado de imágenes tradicional mediante la etiqueta nativa `<img>` por la directiva de rendimiento avanzado `NgOptimizedImage`. Esto inyecta de forma automatizada políticas de *lazy loading* inteligente y priorización de recursos críticos, mitigando la latencia en redes móviles y reduciendo drásticamente las métricas de carga inicial de cara al usuario final.
+* **Desbloqueo del Main Thread:** La arquitectura tradicional acoplada al motor de detección de cambios global de `Zone.js` sobrecargaba el hilo principal de ejecución del navegador ante cualquier interacción del DOM. Al implementar la estrategia Zoneless con `ChangeDetectionStrategy.OnPush`, se eliminó el "dirty checking" cíclico, liberando ciclos de CPU en el entorno cliente y neutralizando por completo el Cumulative Layout Shift (CLS).
+
+### 2. Estrategia y MVP (Valor de Negocio)
+* **Arquitectura Standalone y Aceleración del Time to Market:** La adopción del paradigma de componentes autónomos (`standalone: true`) eliminó el acoplamiento y la burocracia técnica de los módulos globales (`NgModule`). Esto permitió el desarrollo modular en paralelo de los componentes `GalleryComponent` e `ImageItemComponent`, comprimiendo los tiempos de entrega del MVP.
+* **Mitigación de Deuda Técnica mediante Reactividad Pura:** El uso de las APIs modernas `input.required()`, `output()` y estados administrados por `signal()` erradicó el uso de tuberías asíncronas pesadas y flujos complejos basados en RxJS. 
+* **Inmutabilidad y Rendimiento Algorítmico:** Se prohibieron de forma estricta las mutaciones directas en memoria mediante métodos invasivos como `.push()` o `.splice()`. El control de estado se delegó en la función pura `this.images.update()`, garantizando predictibilidad total. Al combinarse con el bloque de control nativo `@for` y rastreo `track image.id`, el sistema adquiere una eficiencia de renderizado $O(1)$, destruyendo o insertando nodos en el DOM de manera quirúrgica.
+
+### 3. Eficiencia con IA (Optimización de QA y Pruebas)
+* **Aislamiento Estático en TestBed:** La optimización de tiempos en los ciclos de control de calidad se logró modelando los contratos de datos mediante interfaces estrictas (`Image`) y desacoplando las dependencias del entorno de pruebas unitarias.
+* **Eficiencia en la Automatización:** Al operar en modo Zoneless nativo, los tests unitarios dentro del entorno `TestBed` no requieren esperar a la estabilización de microtareas asíncronas externas de `Zone.js`. Las aserciones se ejecutan de forma síncrona e inmediata tras simular la mutación de una Signal (`.update()`) o la interceptación del burbujeo del DOM mediante `event.stopPropagation()`, reduciendo el tiempo de ejecución de la suite de QA a nivel local y en los flujos de Integración Continua (CI).
