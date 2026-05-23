@@ -1,11 +1,49 @@
-<div class="max-w-6xl mx-auto px-4">
-  <h1 class="text-4xl font-black text-slate-900 mb-8 text-center tracking-tighter">
-    GALLERY_SHOWCASE
-  </h1>
-  
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    @for (img of images(); track img.id) {
-      <app-image-item [imageData]="img"></app-image-item>
+<div class="gallery-container p-6 bg-gray-50 min-h-screen">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">🖼️ Mi Galería Zoneless Reactiva</h1>
+
+  <form [formGroup]="imageForm" (ngSubmit)="addImage()" class="max-w-md mx-auto mb-10 p-6 bg-white rounded-lg shadow-md border">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">✨ Añadir Nueva Imagen</h2>
+    
+    <div class="mb-4">
+      <label class="block text-gray-600 text-sm font-bold mb-2">URL de la Imagen:</label>
+      <input 
+        formControlName="src" 
+        type="text" 
+        placeholder="https://picsum.photos/id/..." 
+        class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-gray-600 text-sm font-bold mb-2">Texto Alternativo (Alt):</label>
+      <input 
+        formControlName="alt" 
+        type="text" 
+        placeholder="Ej. Bosque animado" 
+        class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+    </div>
+
+    <button 
+      [disabled]="imageForm.invalid" 
+      type="submit" 
+      class="w-full bg-indigo-600 text-white p-2 rounded font-bold hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+      ➕ Agregar a la Galería
+    </button>
+  </form>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    
+    @for (image of images(); track image.id) {
+      
+      <app-image-item 
+        [imageData]="image" 
+        (deleteImage)="removeImage(image.id)">
+      </app-image-item>
+      
+    } @empty {
+      <p class="text-center text-gray-500 col-span-full py-8 text-lg">
+        La galería está vacía. No quedan imágenes en el estado.
+      </p>
     }
+    
   </div>
 </div>

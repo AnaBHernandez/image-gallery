@@ -1,18 +1,16 @@
-<div class="overflow-hidden rounded-xl bg-white shadow-sm border border-slate-200 transition-all duration-300 hover:shadow-md hover:scale-[1.02]">
-  <div class="w-full h-48 bg-slate-100">
-    <img 
-      [src]="imageData().src" 
-      [alt]="imageData().alt"
-      class="w-full h-full object-cover"
-    />
-  </div>
+<div class="image-container relative group border p-2 rounded-lg bg-white shadow-sm">
   
-  <div class="p-4">
-    <span class="text-xs font-mono text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md">
-      ID: #{{ imageData().id }}
-    </span>
-    <h3 class="text-lg font-bold text-slate-800 mt-2 truncate">
-      {{ imageData().alt }}
-    </h3>
-  </div>
+  <img 
+    [ngSrc]="imageData().src" 
+    [alt]="imageData().alt" 
+    width="300" 
+    height="200" 
+    class="w-full h-auto object-cover rounded" />
+
+  <button 
+    (click)="onDeleteClick($event)" 
+    class="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-700 transition-colors shadow-md">
+    🗑️ Borrar
+  </button>
+  
 </div>
