@@ -1,0 +1,47 @@
+name: Deploy Image Gallery
+# Control de eventos: Se activa al hacer push a tu rama de trabajo activa
+on:
+  push:
+    branches: [ "feature/event-handlers", "feature/*" ]
+
+# Permisiones mínimas de seguridad para interactuar con GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Descarga el código del repositorio en el contenedor virtual
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      # 2. Configura Node.js en la versión exacta de tu entorno de Gijón (v24.15.0)
+      - name: Configurar Node.js v24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.15.0'
+
+      # 3. Instala tu gestor de paquetes pnpm en la versión exacta (v11.1.1)
+      - name: Instalar pnpm v11
+        run: npm install -g pnpm@11.1.1
+
+      # 4. Descarga de forma limpia las dependencias de node_modules
+      - name: Instalar dependencias
+        run: pnpm install
+
+      # 5. Compilar el proyecto Angular v21 inyectando el base-href del repositorio
+      - name: Compilar aplicacion Angular
+        run: pnpm ng build --base-href /image-gallery/
+
+# 6. Paso Correctivo Definitivo: Nomenclatura compatible con el linter de VS Code
+      - name: Subir artefacto de producción
+        uses: actions/upload-pages-artifact@v3.0.0
+        with:
+          # Carpeta de distribución estática del navegador generada por Angular 21
+          path: dist/image-gallery/browser
+      # 7. Desplegar el artefacto previamente subido sin usar parámetros inválidos
+      - name: Desplegar en GitHub Pages
+        uses: actions/deploy-pages@v4
